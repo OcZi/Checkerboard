@@ -1,13 +1,17 @@
 package me.oczi.chess.pieces;
 
 import me.oczi.chess.location.ChessLocation;
-import me.oczi.chess.object.ChessTable;
+import me.oczi.chess.object.ChessGame;
 
 /**
- * A Chess piece representation for the {@link ChessTable}.
+ * A Chess piece representation for the {@link ChessGame}.
  */
 public interface ChessPiece {
 
+  /**
+   * Set id of chess.
+   * @param id Id to set.
+   */
   void setId(String id);
 
   /**
@@ -24,8 +28,13 @@ public interface ChessPiece {
 
   /**
    * Get all the possible moves of Chess piece.
-   * NOTE: This not process the obstacles.
    * @return all the possibles moves.
    */
-  ChessLocation[] getPossibleMoves();
+  ChessLocation[][] getPossibleMoves(ChessGame game);
+
+  /**
+   * Get current Location of Chess piece.
+   * @return Location of chess.
+   */
+  ChessLocation getCurrentLocation();
 }

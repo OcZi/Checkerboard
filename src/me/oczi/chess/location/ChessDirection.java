@@ -36,6 +36,12 @@ public enum ChessDirection {
     this.y = y;
   }
 
+  public ChessLocation applyTo(ChessLocation chessLocation) {
+    return new ChessLocationImpl(
+        chessLocation.getX() + x,
+        chessLocation.getY() + y);
+  }
+
   /**
    * Get Y axis of direction.
    * @return Y axis.

@@ -4,6 +4,12 @@ import me.oczi.chess.object.exception.MoveOutOfBoundsException;
 
 public interface ChessPreconditions {
 
+  static void checkId(String id1, String id2) {
+    if (id1.equalsIgnoreCase(id2)) {
+      throw new IllegalStateException(id1 + " already exist!");
+    }
+  }
+
   static void checkMove(int i,
                         String axis) {
     if (i <= 0) {

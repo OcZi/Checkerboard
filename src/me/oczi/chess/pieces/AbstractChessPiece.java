@@ -2,19 +2,25 @@ package me.oczi.chess.pieces;
 
 import me.oczi.chess.ChessPreconditions;
 import me.oczi.chess.location.ChessLocation;
+import me.oczi.chess.object.ChessGame;
 
 import static me.oczi.chess.ChessPreconditions.checkLength;
 
 public abstract class AbstractChessPiece implements ChessPiece {
   protected String id;
   protected final ChessPieceType type;
+  protected final ChessMove move;
 
-  private ChessLocation[] possibleMoves;
+  protected final ChessLocation currentLocation;
 
   protected AbstractChessPiece(String id,
-                               ChessPieceType type) {
+                               ChessPieceType type,
+                               ChessMove move,
+                               ChessLocation currentLocation) {
     this.id = id;
     this.type = type;
+    this.move = move;
+    this.currentLocation = currentLocation;
   }
 
   @Override
@@ -34,7 +40,12 @@ public abstract class AbstractChessPiece implements ChessPiece {
   }
 
   @Override
-  public ChessLocation[] getPossibleMoves() {
-    return possibleMoves;
+  public ChessLocation getCurrentLocation() {
+    return currentLocation;
+  }
+
+  @Override
+  public ChessLocation[][] getPossibleMoves(ChessGame game) {
+    return move.adjacent(game, this);
   }
 }
