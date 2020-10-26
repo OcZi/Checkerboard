@@ -45,5 +45,13 @@ public interface ChessPiece {
    */
   ChessLocation getCurrentLocation();
 
+  /**
+   * Check if this piece has a freedom movement.
+   *
+   * Basically, if the piece can move
+   * to the limit of the table according
+   * to the directions it can go.
+   * @return if has freedom movement.
+   */
   boolean hasFreedomMove();
 }

@@ -5,7 +5,7 @@ import me.oczi.chess.object.ChessGame;
 import me.oczi.chess.pieces.moves.TypeMove;
 import me.oczi.chess.pieces.types.ChessPieceType;
 
-import static me.oczi.chess.ChessPreconditions.checkLength;
+import static me.oczi.chess.utils.ChessPreconditions.checkLength;
 
 public abstract class AbstractChessPiece implements ChessPiece {
   protected String id;
