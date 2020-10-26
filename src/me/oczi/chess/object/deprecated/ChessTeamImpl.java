@@ -1,4 +1,4 @@
-package me.oczi.chess.deprecated;
+package me.oczi.chess.object.deprecated;
 
 import me.oczi.chess.pieces.ChessPiece;
 

@@ -2,6 +2,7 @@ package me.oczi.chess.pieces;
 
 import me.oczi.chess.location.ChessLocation;
 import me.oczi.chess.object.ChessGame;
+import me.oczi.chess.pieces.types.ChessPieceType;
 
 /**
  * A Chess piece representation for the {@link ChessGame}.
@@ -16,7 +17,7 @@ public interface ChessPiece {
 
   /**
    * Set current location of Chess piece.
-   * @param location
+   * @param location Location to set.
    */
   void setCurrentLocation(ChessLocation location);
 
@@ -43,4 +44,6 @@ public interface ChessPiece {
    * @return Location of chess.
    */
   ChessLocation getCurrentLocation();
+
+  boolean hasFreedomMove();
 }

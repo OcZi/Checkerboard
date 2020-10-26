@@ -2,19 +2,26 @@ package me.oczi.chess.pieces;
 
 import me.oczi.chess.location.ChessLocation;
 import me.oczi.chess.object.ChessGame;
+import me.oczi.chess.pieces.moves.TypeMove;
+import me.oczi.chess.pieces.types.ChessPieceType;
 
 import static me.oczi.chess.ChessPreconditions.checkLength;
 
 public abstract class AbstractChessPiece implements ChessPiece {
   protected String id;
   protected final ChessPieceType type;
-  protected final ChessMove move;
+  protected final TypeMove move;
 
   protected ChessLocation currentLocation;
 
+  protected AbstractChessPiece(ChessPieceType type,
+                               TypeMove move) {
+    this(type.getDefaultId(), type, move, null);
+  }
+
   protected AbstractChessPiece(String id,
                                ChessPieceType type,
-                               ChessMove move,
+                               TypeMove move,
                                ChessLocation currentLocation) {
     this.id = id;
     this.type = type;

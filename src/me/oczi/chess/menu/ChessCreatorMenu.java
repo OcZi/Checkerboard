@@ -33,12 +33,27 @@ public class ChessCreatorMenu extends AbstractChessMenu {
       return;
     }
     // TODO: Change to switch after implement all the possibles chess pieces.
-    if ("pawn".equals(next.toLowerCase())) {
-      // X: 0 Y: 0 temporal coordinates.
-      piece = new Pawn(0, 0);
-    } else {
-      println("Invalid chess.");
-      return;
+    switch (next.toLowerCase()) {
+      case "pawn":
+        piece = new Pawn();
+        break;
+      case "rook":
+        piece = new Rook();
+        break;
+      case "queen":
+        piece = new Queen();
+        break;
+      case "king":
+        piece = new King();
+        break;
+      case "bishop":
+        piece = new Bishop();
+        break;
+      case "knight":
+        piece = new Knight();
+        break;
+      default:
+        throw new IllegalArgumentException("Invalid chess.");
     }
     int x = printLineInt("Write the X axis:", scanner);
     int y = printLineInt("Write the Y axis:", scanner);

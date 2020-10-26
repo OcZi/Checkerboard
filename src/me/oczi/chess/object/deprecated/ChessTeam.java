@@ -1,4 +1,4 @@
-package me.oczi.chess.deprecated;
+package me.oczi.chess.object.deprecated;
 
 import me.oczi.chess.pieces.ChessPiece;
 
@@ -10,14 +10,6 @@ import me.oczi.chess.pieces.ChessPiece;
  */
 @Deprecated
 public interface ChessTeam {
-
-  /**
-   * Create a new team.
-   * @return new team.
-   */
-  static ChessTeam newTeam() {
-    return new ChessTeamImpl();
-  }
 
   /**
    * Get piece of chess by id.
