@@ -8,7 +8,8 @@ import static me.oczi.chess.location.ChessDirection.*;
 
 public enum ChessMove {
   SQUARE_STEP(false, SOUTH, EAST, NORTH, WEST),
-  DUO_SQUARE_STEP(false, SOUTH, NORTH), // Fpr Pawn
+  DUO_SQUARE_STEP(false, SOUTH, NORTH),
+  MONO_SQUARE_STEP(false, NORTH), // For Pawn
   DIAGONAL_STEP(false, NORTHEAST, SOUTHEAST, NORTHWEST, SOUTHWEST),
   ;
 

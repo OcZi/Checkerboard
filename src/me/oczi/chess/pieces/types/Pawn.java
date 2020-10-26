@@ -14,7 +14,7 @@ public class Pawn extends AbstractChessPiece {
   public Pawn(String id, int x, int y) {
     super(id,
         ChessPieceType.PAWN,
-        ChessMove.DUO_SQUARE_STEP,
+        ChessMove.MONO_SQUARE_STEP,
         new ChessLocationImpl(x, y));
   }
 
