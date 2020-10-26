@@ -3,6 +3,7 @@ package me.oczi.chess.console;
 import me.oczi.chess.location.ChessLocation;
 import me.oczi.chess.object.ChessGame;
 import me.oczi.chess.pieces.ChessPiece;
+import me.oczi.chess.utils.MoreChess;
 
 public interface ChessTableGX {
 
@@ -10,9 +11,10 @@ public interface ChessTableGX {
    * Visualize the table in the CLI.
    * @param table ChessTable to visualize.
    */
-  static String[] visualizeTable(ChessGame table) {
+  static void visualizeTable(ChessGame table) {
     ChessPiece[][] arrayTable = table.getArrayTable();
-    String[] rows = new String[8];
+    String[] rows = new String[9];
+    rows[0] = generateHorizontalNumbers(arrayTable.length);
     for (int i = 0; i < arrayTable.length; i++) {
       ChessPiece[] xRow = arrayTable[i];
       StringBuilder builder = new StringBuilder(i + 1 + " ");
@@ -34,52 +36,70 @@ public interface ChessTableGX {
         lastLength = Math.min(id.length(), 2);
         builder.append(id);
       }
-      rows[i] = builder.toString();
+      rows[i+1] = builder.toString();
     }
     for (String row : rows) {
       System.out.println(row);
     }
     System.out.println();
-    return rows;
   }
 
-  static void visualizeMovement(ChessGame chessGame, ChessPiece piece) {
-    ChessPiece[][] arrayTable = chessGame.getArrayTable();
-    ChessLocation[][] possibleMoves = piece.getPossibleMoves(chessGame);
-    String[] rows = new String[8];
-    for (int i = 0; i < arrayTable.length; i++) {
-      ChessPiece[] xRow = arrayTable[i];
-      StringBuilder builder = new StringBuilder(i + 1 + " ");
-      boolean isMove = false;
-      for (ChessPiece yPiece : xRow) {
+  /**
+   * Visualize the Chess table only
+   * with the piece and their possible moves.
+   * @param possibleMoves Possible moves.
+   * @param piece Piece to visualize.
+   */
+  static void visualizeMovement(ChessLocation[][] possibleMoves,
+                                ChessPiece piece) {
+    String[] rows = new String[9];
+    // Some of the logic is the same as visualizeTable
+    // but iterating possibleMoves.
+    rows[0] = generateHorizontalNumbers(possibleMoves.length);
+    for (int x = 0; x < possibleMoves.length; x++) {
+      StringBuilder builder = new StringBuilder(x + 1 + " ");
+      ChessLocation[] yMove = possibleMoves[x];
+      int lastLength = 2;
+      for (int y = 0; y < yMove.length; y++) {
+        ChessLocation chessLocation = yMove[y];
         if (builder.length() > 0) {
-          builder.append("  ");
+          builder.append(lastLength == 2 ? " " : "  ");
         }
-        if (yPiece == null) {
-          builder.append(".");
-          continue;
+        if (chessLocation == null) {
+          // Check if location is the piece of the method's parameter.
+          String symbol = MoreChess.chessEquals(piece, x, y)
+              ? piece.getId()
+              : ".";
+          builder.append(symbol);
+          lastLength = Math.min(symbol.length(), 2);
+        } else {
+          builder.append("*");
+          lastLength = 1;
         }
-        int y = yPiece.getCurrentLocation().getY();
-        int x = yPiece.getCurrentLocation().getX();
-        for (int i1 = 0; i1 < possibleMoves.length; i1++) {
-          if (i1 != x) {
-            continue;
-          }
-          for (int i2 = 0; i2 < possibleMoves[x].length; i2++) {
-            if (i2 != y) {
-              continue;
-            }
-
-            isMove = true;
-          }
-        }
-        builder.append(isMove ? "0" : ".");
       }
-      rows[i] = builder.toString();
+      rows[x+1] = builder.toString();
     }
     for (String row : rows) {
       System.out.println(row);
     }
     System.out.println();
+  }
+
+  /**
+   * Generate a horizontal count of numbers
+   * for the Chess table.
+   * @param count Count of numbers.
+   * @return Horizontal count of numbers as String.
+   */
+  static String generateHorizontalNumbers(int count) {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < count; i++) {
+      // Extra space in the first iteration.
+      if (builder.length() == 0) {
+        builder.append(" ");
+      }
+      builder.append("  ").append(i + 1);
+    }
+    return builder.toString();
   }
 }
