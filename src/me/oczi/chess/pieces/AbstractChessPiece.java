@@ -1,6 +1,5 @@
 package me.oczi.chess.pieces;
 
-import me.oczi.chess.ChessPreconditions;
 import me.oczi.chess.location.ChessLocation;
 import me.oczi.chess.object.ChessGame;
 
@@ -11,7 +10,7 @@ public abstract class AbstractChessPiece implements ChessPiece {
   protected final ChessPieceType type;
   protected final ChessMove move;
 
-  protected final ChessLocation currentLocation;
+  protected ChessLocation currentLocation;
 
   protected AbstractChessPiece(String id,
                                ChessPieceType type,
@@ -27,6 +26,11 @@ public abstract class AbstractChessPiece implements ChessPiece {
   public void setId(String id) {
     checkLength(id, 2);
     this.id = id;
+  }
+
+  @Override
+  public void setCurrentLocation(ChessLocation location) {
+    this.currentLocation = location;
   }
 
   @Override
@@ -46,6 +50,6 @@ public abstract class AbstractChessPiece implements ChessPiece {
 
   @Override
   public ChessLocation[][] getPossibleMoves(ChessGame game) {
-    return move.adjacent(game, this);
+    return move.getPossibleAdjacentMoves(game, this);
   }
 }

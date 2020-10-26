@@ -9,10 +9,16 @@ import me.oczi.chess.object.ChessGame;
 public interface ChessPiece {
 
   /**
-   * Set id of chess.
+   * Set id of Chess piece.
    * @param id Id to set.
    */
   void setId(String id);
+
+  /**
+   * Set current location of Chess piece.
+   * @param location
+   */
+  void setCurrentLocation(ChessLocation location);
 
   /**
    * Get ID of Chess Piece.

@@ -20,16 +20,29 @@ public enum ChessMove {
     this.directions = directions;
   }
 
+  /**
+   * Check if can move infinitely.
+   * @return Has freedom move.
+   */
   public boolean hasFreedomMove() {
     return freedomMove;
   }
 
-  public ChessLocation[][] getPossibleAdjacentMoves(ChessGame game, ChessPiece piece) {
+  /**
+   * Get the possible moves in the adjacent locations.
+   * @param game Chess Game to process Chess Table.
+   * @param piece Piece to process movement.
+   * @return An Array 2D of {@link ChessLocation}.
+   */
+  public ChessLocation[][] getPossibleAdjacentMoves(ChessGame game,
+                                                    ChessPiece piece) {
     ChessLocation currentLocation = piece.getCurrentLocation();
     ChessLocation[][] locations = new ChessLocation[8][8];
     for (ChessDirection direction : directions) {
       while (true) {
-        ChessLocation chessLocation = direction.applyTo(currentLocation);
+        ChessLocation chessLocation =
+            direction.applyTo(currentLocation);
+        // Limit Chess table checks
         int x = chessLocation.getX();
         if (x > 8 || x < 0) {
           break;
@@ -38,10 +51,12 @@ public enum ChessMove {
         if (y > 8 || y < 0) {
           break;
         }
+        // If found a piece in the direction, break iteration.
         ChessPiece pieceAt = game.getPieceAt(x, y);
         if (pieceAt != null) {
           break;
         }
+        // If not have freedom move, break after first iteration.
         locations[x][y] = chessLocation;
         if (!freedomMove) {
           break;
