@@ -6,10 +6,10 @@ import me.oczi.chess.pieces.ChessPiece;
  * Directions that can use a {@link ChessPiece}.
  */
 public enum ChessDirection {
-  SOUTH(0, -1),
-  NORTH(0, 1),
-  EAST(-1, 0),
-  WEST(1, 0),
+  NORTH(-1, 0),
+  SOUTH(1, 0),
+  EAST(1, 0),
+  WEST(-1, 0),
 
   // Diagonal directions
   SOUTHEAST(SOUTH, EAST),

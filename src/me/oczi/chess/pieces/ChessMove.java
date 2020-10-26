@@ -7,7 +7,8 @@ import me.oczi.chess.object.ChessGame;
 import static me.oczi.chess.location.ChessDirection.*;
 
 public enum ChessMove {
-  SQUARE_STEP(false, EAST, NORTH, WEST),
+  SQUARE_STEP(false, SOUTH, EAST, NORTH, WEST),
+  DUO_SQUARE_STEP(false, SOUTH, NORTH), // Fpr Pawn
   DIAGONAL_STEP(false, NORTHEAST, SOUTHEAST, NORTHWEST, SOUTHWEST),
   ;
 
@@ -23,23 +24,23 @@ public enum ChessMove {
     return freedomMove;
   }
 
-  public ChessLocation[][] adjacent(ChessGame game, ChessPiece piece) {
+  public ChessLocation[][] getPossibleAdjacentMoves(ChessGame game, ChessPiece piece) {
     ChessLocation currentLocation = piece.getCurrentLocation();
     ChessLocation[][] locations = new ChessLocation[8][8];
     for (ChessDirection direction : directions) {
       while (true) {
         ChessLocation chessLocation = direction.applyTo(currentLocation);
         int x = chessLocation.getX();
-        if (x > 8 || x <= 0) {
-          continue;
+        if (x > 8 || x < 0) {
+          break;
         }
         int y = chessLocation.getY();
-        if (y > 8 || y <= 0) {
-          continue;
+        if (y > 8 || y < 0) {
+          break;
         }
         ChessPiece pieceAt = game.getPieceAt(x, y);
         if (pieceAt != null) {
-          continue;
+          break;
         }
         locations[x][y] = chessLocation;
         if (!freedomMove) {
