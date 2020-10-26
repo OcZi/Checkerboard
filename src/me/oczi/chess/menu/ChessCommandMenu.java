@@ -32,25 +32,35 @@ public class ChessCommandMenu extends AbstractChessMenu {
       return;
     }
     // TEST
-    println(line);
+    ChessPiece piece;
     switch (line.toLowerCase()) {
       case "select":
-        // If args have a length of 1, doesn't have arguments.
-        if (args.length < 2) break;
-        ChessPiece piece = game.getPieceWithId(
-            String.valueOf(args[1]));
-        if (piece == null) break;
-        ChessSelectMenu.openSelectMenu(game, piece);
+        ChessSelectMenu.openSelectMenu(
+            game, getPieceArgChecked());
         break;
       case "new":
         ChessCreatorMenu.openCreatorMenu(game);
         break;
       case "remove":
-        // TODO: Implement remove menu and logic
+        ChessRemoveMenu.openRemoveMenu(
+            game, getPieceArgChecked());
         break;
       default:
         println("Invalid command.");
         break;
     }
+  }
+
+  private ChessPiece getPieceArgChecked() {
+    // If args have a length of 1, doesn't have arguments.
+    if (args.length < 2)  {
+      throw new IllegalArgumentException("Invalid command.");
+    }
+    ChessPiece piece = game.getPieceWithId(
+        String.valueOf(args[1]));
+    if (piece == null) {
+      throw new IllegalArgumentException("Invalid command.");
+    }
+    return piece;
   }
 }

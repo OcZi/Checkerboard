@@ -16,7 +16,8 @@ public class ChessRecursiveTableMenu extends AbstractChessMenu {
       ChessTableGX.visualizeTable(chessGame);
       println(
           "Execute a command:",
-          "Select <ID> - Select a piece by ID.",
+          "Select <ID> - Select a piece to move by ID.",
+          "Remove <ID> - Remove a Chess piece.",
           "New - Create a new Chess piece.",
           "Quit - Quit menu.");
       String line = scanner.nextLine();

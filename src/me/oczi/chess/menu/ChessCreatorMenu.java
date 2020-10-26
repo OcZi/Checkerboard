@@ -1,5 +1,6 @@
 package me.oczi.chess.menu;
 
+import me.oczi.chess.console.ChessTableGX;
 import me.oczi.chess.location.ChessLocationImpl;
 import me.oczi.chess.object.ChessGame;
 import me.oczi.chess.pieces.ChessPiece;
@@ -56,6 +57,7 @@ public class ChessCreatorMenu extends AbstractChessMenu {
         throw new IllegalArgumentException("Invalid chess.");
     }
     // Basic check of axis
+    ChessTableGX.visualizeTable(game);
     int x = printLineInt("Write the X axis:", scanner);
     char yChar = printLineChar(
         "Write the Y axis letter:", scanner);

@@ -1,10 +1,10 @@
 package me.oczi.chess.menu;
 
-import me.oczi.chess.ChessPreconditions;
 import me.oczi.chess.console.ChessTableGX;
 import me.oczi.chess.location.ChessLocation;
 import me.oczi.chess.object.ChessGame;
 import me.oczi.chess.pieces.ChessPiece;
+import me.oczi.chess.utils.ChessPreconditions;
 import me.oczi.chess.utils.MoreChess;
 
 public class ChessSelectMenu extends AbstractChessMenu {
