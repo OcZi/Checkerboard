@@ -1,6 +1,7 @@
 package me.oczi.chess.location;
 
 import me.oczi.chess.pieces.ChessPiece;
+import me.oczi.chess.utils.MoreChess;
 
 /**
  * Directions that can use a {@link ChessPiece}.
@@ -8,13 +9,13 @@ import me.oczi.chess.pieces.ChessPiece;
 public enum ChessDirection {
   NORTH(-1, 0),
   SOUTH(1, 0),
-  EAST(1, 0),
-  WEST(-1, 0),
+  EAST(0, 1),
+  WEST(0, -1),
 
   // Diagonal directions
   SOUTHEAST(SOUTH, EAST),
-  SOUTHWEST(SOUTH, EAST),
-  NORTHEAST(NORTH, WEST),
+  SOUTHWEST(SOUTH, WEST),
+  NORTHEAST(NORTH, EAST),
   NORTHWEST(NORTH, WEST);
 
   private final int x;
@@ -42,9 +43,7 @@ public enum ChessDirection {
    * @return Applied Chess Location.
    */
   public ChessLocation applyTo(ChessLocation chessLocation) {
-    return new ChessLocationImpl(
-        chessLocation.getX() + x,
-        chessLocation.getY() + y);
+    return MoreChess.addLocation(chessLocation, x, y);
   }
 
   /**
