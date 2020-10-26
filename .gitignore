@@ -1,4 +1,5 @@
 # Maven generated files
+/.idea/
 target/
 out/
 dependency-reduced-pom.xml
