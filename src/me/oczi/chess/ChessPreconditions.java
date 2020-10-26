@@ -12,7 +12,7 @@ public interface ChessPreconditions {
 
   static void checkMove(int i,
                         String axis) {
-    if (i <= 0) {
+    if (i < 0) {
       throw new MoveOutOfBoundsException(
           String.format(
               "Movement of axis %s is equals or minor that 0!",
