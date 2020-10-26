@@ -36,6 +36,11 @@ public enum ChessDirection {
     this.y = y;
   }
 
+  /**
+   * Apply X & Y axis to the Chess Location.
+   * @param chessLocation Chess location to apply.
+   * @return Applied Chess Location.
+   */
   public ChessLocation applyTo(ChessLocation chessLocation) {
     return new ChessLocationImpl(
         chessLocation.getX() + x,

@@ -1,7 +1,6 @@
 package me.oczi.chess.object;
 
 import me.oczi.chess.pieces.ChessPiece;
-import me.oczi.chess.team.ChessTeam;
 
 /**
  * Chess's game with Table and team.
@@ -34,13 +33,17 @@ public interface ChessGame {
    */
   void putPiece(int x, int y, ChessPiece piece);
 
+  /**
+   * Remove a piece in the table.
+   * @param piece Piece to remove.
+   */
   void removePiece(ChessPiece piece);
+
+  void swapPiece(int x, int y, ChessPiece piece);
 
   /**
    * Get Array 2D of table.
    * @return A Chess table array of two dimensions.
    */
   ChessPiece[][] getArrayTable();
-
-  ChessTeam getTeam();
 }

@@ -1,17 +1,24 @@
-package me.oczi.chess.team;
+package me.oczi.chess.deprecated;
 
 import me.oczi.chess.pieces.ChessPiece;
 
+/**
+ * Unused implementation of {@link ChessTeam}.
+ */
 public class ChessTeamImpl implements ChessTeam {
   private ChessPiece[] pieces;
 
   ChessTeamImpl() {
-    pieces = new ChessPiece[]{};
+    pieces = new ChessPiece[8];
   }
 
   @Override
   public ChessPiece getPiece(String id) {
     for (ChessPiece piece : pieces) {
+      if (piece == null) {
+        System.out.println("is null");
+        continue;
+      }
       if (piece.getId().equalsIgnoreCase(id)) {
         return piece;
       }
@@ -23,7 +30,15 @@ public class ChessTeamImpl implements ChessTeam {
   @Override
   public void addPiece(ChessPiece piece) {
     if (hasPieceWithId(piece.getId())) {
-      throw new IllegalStateException(piece.getId() + " already exist!");
+      int i = 0;
+      while (true) {
+        i++;
+        String nextId = piece.getType().getDefaultId() + i;
+        if (!hasPieceWithId(nextId)) {
+          piece.setId(nextId);
+          break;
+        }
+      }
     }
 
     piece.setId(piece.getId().toLowerCase());
@@ -49,14 +64,10 @@ public class ChessTeamImpl implements ChessTeam {
 
   @Override
   public boolean hasPieceWithId(String id) {
-    for (ChessPiece piece : pieces) {
-      if (piece.getId().equalsIgnoreCase(id)) {
-        return true;
-      }
-    }
-    return false;
+    return getPiece(id) != null;
   }
 
+  @Override
   public ChessPiece[] getPieces() {
     return pieces;
   }

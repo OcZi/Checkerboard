@@ -1,10 +1,14 @@
-package me.oczi.chess.team;
+package me.oczi.chess.deprecated;
 
 import me.oczi.chess.pieces.ChessPiece;
 
 /**
  * Chess team for the player.
+ * Deprecated for desync arrays with the Chess Table.
+ * And will never be an another team
+ * for now.
  */
+@Deprecated
 public interface ChessTeam {
 
   /**
@@ -17,8 +21,8 @@ public interface ChessTeam {
 
   /**
    * Get piece of chess by id.
-   * @param id
-   * @return
+   * @param id ID of the chess.
+   * @return piece by id, or null.
    */
   ChessPiece getPiece(String id);
 
@@ -40,4 +44,10 @@ public interface ChessTeam {
    * @return Is present or not.
    */
   boolean hasPieceWithId(String id);
+
+  /**
+   * Get all the pieces of the team.
+   * @return Team's pieces.
+   */
+  ChessPiece[] getPieces();
 }
