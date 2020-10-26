@@ -1,9 +1,10 @@
 package me.oczi.chess.object;
 
-import me.oczi.chess.ChessPreconditions;
 import me.oczi.chess.location.ChessLocation;
 import me.oczi.chess.location.ChessLocationImpl;
 import me.oczi.chess.pieces.ChessPiece;
+import me.oczi.chess.utils.ChessPreconditions;
+import me.oczi.chess.utils.MoreChess;
 
 /**
  * Basic implementation of {@link ChessGame}.
@@ -24,10 +25,9 @@ public class ChessGameImpl implements ChessGame {
   @Override
   public ChessPiece getPieceAt(int x, int y) {
     // Yep, just a array accessor.
-    if (arrayTable.length == 0) {
-      return null;
-    }
-    return arrayTable[x][y];
+    return arrayTable.length == 0
+        ? null
+        : arrayTable[x][y];
   }
 
   @Override
@@ -45,11 +45,21 @@ public class ChessGameImpl implements ChessGame {
 
   @Override
   public void putPiece(int x, int y, ChessPiece piece) {
+    checkAvailableIds(piece);
+    ChessPreconditions.checkTableMove(x, y);
+    arrayTable[x][y] = piece;
+  }
+
+  private void checkAvailableIds(ChessPiece piece) {
     // Create cycle to check if piece Id
     int i = 0;
     String nextId = piece.getId();
     while (true) {
       ++i;
+      if (i == 10) {
+        checkAlphabeticAvailableIds(piece);
+        break;
+      }
       ChessPiece pieceWithId = getPieceWithId(nextId);
       if (pieceWithId == null) {
         piece.setId(nextId);
@@ -57,8 +67,26 @@ public class ChessGameImpl implements ChessGame {
       }
       nextId = piece.getId() + i;
     }
-    ChessPreconditions.checkTableMove(x, y);
-    arrayTable[x][y] = piece;
+  }
+
+  private void checkAlphabeticAvailableIds(ChessPiece piece) {
+    char[] alphabetic = MoreChess.alphabetic;
+    int alphaLength = alphabetic.length;
+    int i = 0;
+    String nextId;
+    while (true) {
+      if (alphaLength - 1 < i) {
+        throw new IllegalStateException(
+            "Cannot assign an ID for the piece. No ids available.");
+      }
+      char c = alphabetic[i++];
+      nextId = piece.getId() + c;
+      ChessPiece pieceWithId = getPieceWithId(nextId);
+      if (pieceWithId == null) {
+        piece.setId(nextId);
+        break;
+      }
+    }
   }
 
   @Override
