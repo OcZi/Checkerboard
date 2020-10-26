@@ -14,7 +14,7 @@ public interface ChessTableGX {
   static void visualizeTable(ChessGame table) {
     ChessPiece[][] arrayTable = table.getArrayTable();
     String[] rows = new String[9];
-    rows[0] = generateHorizontalNumbers(arrayTable.length);
+    rows[0] = createHorizontalBar(arrayTable.length);
     for (int i = 0; i < arrayTable.length; i++) {
       ChessPiece[] xRow = arrayTable[i];
       StringBuilder builder = new StringBuilder(i + 1 + " ");
@@ -55,7 +55,7 @@ public interface ChessTableGX {
     String[] rows = new String[9];
     // Some of the logic is the same as visualizeTable
     // but iterating possibleMoves.
-    rows[0] = generateHorizontalNumbers(possibleMoves.length);
+    rows[0] = createHorizontalBar(possibleMoves.length);
     for (int x = 0; x < possibleMoves.length; x++) {
       StringBuilder builder = new StringBuilder(x + 1 + " ");
       ChessLocation[] yMove = possibleMoves[x];
@@ -91,14 +91,16 @@ public interface ChessTableGX {
    * @param count Count of numbers.
    * @return Horizontal count of numbers as String.
    */
-  static String generateHorizontalNumbers(int count) {
+  static String createHorizontalBar(int count) {
     StringBuilder builder = new StringBuilder();
     for (int i = 0; i < count; i++) {
       // Extra space in the first iteration.
       if (builder.length() == 0) {
         builder.append(" ");
       }
-      builder.append("  ").append(i + 1);
+      builder
+          .append("  ")
+          .append(MoreChess.alphabetic[i]);
     }
     return builder.toString();
   }
