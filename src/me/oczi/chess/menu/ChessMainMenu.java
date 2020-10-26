@@ -4,10 +4,11 @@ public class ChessMainMenu extends AbstractChessMenu {
 
   @Override
   public void openMenu() {
-    println("Checkerboard",
+    println("[Checkerboard v1.2]",
+        "Chess table simulator.",
+        "Designed for debugging.",
         "",
-        "v1.1",
-        "S - Start with a void Chess table.",
+        "S - Start new game.",
         "Q - Quit");
     String line = scanner.nextLine();
     if (line.equalsIgnoreCase("s")) {
