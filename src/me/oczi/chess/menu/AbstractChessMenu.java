@@ -27,6 +27,12 @@ public abstract class AbstractChessMenu implements ChessMenu {
   }
 
   @Override
+  public char printLineChar(String string, Scanner scanner) {
+    println(string);
+    return scanner.next().charAt(0);
+  }
+
+  @Override
   public int printLineInt(String string, Scanner scanner) {
     println(string);
     return scanner.nextInt();

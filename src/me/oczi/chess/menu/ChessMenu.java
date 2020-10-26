@@ -34,6 +34,8 @@ public interface ChessMenu {
    */
   String printLine(String string, Scanner scanner);
 
+  char printLineChar(String string, Scanner scanner);
+
   /**
    * Print a string in a new line and await {@link Scanner#nextInt()}
    * @param string String to print.

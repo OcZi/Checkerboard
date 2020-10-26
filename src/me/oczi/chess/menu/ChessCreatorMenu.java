@@ -3,8 +3,8 @@ package me.oczi.chess.menu;
 import me.oczi.chess.location.ChessLocationImpl;
 import me.oczi.chess.object.ChessGame;
 import me.oczi.chess.pieces.ChessPiece;
-import me.oczi.chess.pieces.ChessPieceType;
-import me.oczi.chess.pieces.types.Pawn;
+import me.oczi.chess.pieces.types.*;
+import me.oczi.chess.utils.MoreChess;
 
 /**
  * Chess Creator of Chess pieces Menu.
@@ -55,10 +55,17 @@ public class ChessCreatorMenu extends AbstractChessMenu {
       default:
         throw new IllegalArgumentException("Invalid chess.");
     }
+    // Basic check of axis
     int x = printLineInt("Write the X axis:", scanner);
-    int y = printLineInt("Write the Y axis:", scanner);
+    char yChar = printLineChar(
+        "Write the Y axis letter:", scanner);
+    int y = MoreChess.indexOfAlphabetic(yChar);
+    if (y == -1) {
+      throw new IllegalArgumentException(
+          "Invalid letter for Y axis: " + yChar);
+    }
     piece.setCurrentLocation(
-        // Minus X & Y for the array.
+        // Minus X & Y for the array slots.
         new ChessLocationImpl(--x, --y));
     game.putPiece(x, y, piece);
   }

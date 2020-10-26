@@ -5,6 +5,7 @@ import me.oczi.chess.console.ChessTableGX;
 import me.oczi.chess.location.ChessLocation;
 import me.oczi.chess.object.ChessGame;
 import me.oczi.chess.pieces.ChessPiece;
+import me.oczi.chess.utils.MoreChess;
 
 public class ChessSelectMenu extends AbstractChessMenu {
   private final ChessGame game;
@@ -23,12 +24,18 @@ public class ChessSelectMenu extends AbstractChessMenu {
   public void openMenu() {
     ChessLocation[][] possibleMoves = piece.getPossibleMoves(game);
     ChessTableGX.visualizeMovement(possibleMoves, piece);
+    // Basic check of axis
     int x = printLineInt(
-        "Write the X axis:", scanner);
-    int y = printLineInt(
-        "Write the Y axis:", scanner);
+        "Write the X axis number:", scanner);
+    char yChar = printLineChar(
+        "Write the Y axis letter:", scanner);
+    int y = MoreChess.indexOfAlphabetic(yChar);
+    if (y == -1) {
+      throw new IllegalArgumentException(
+          "Invalid letter for Y axis: " + yChar);
+    }
     ChessPreconditions.checkTableMove(x, y);
-    // Primitive minus
+    // Primitive minus for array slots.
     --x;
     --y;
     ChessLocation nextLocation = possibleMoves[x][y];
